@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politica de confidențialitate · Facturi ANAF e-Factura</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { margin: 0; font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1c2430; background: #f6f7f9; }
+  @media (prefers-color-scheme: dark) { body { color: #e8edf2; background: #161a1f; } a { color: #8ec5ff; } }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 64px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  .date { opacity: .7; margin: 0 0 28px; }
+  h2 { font-size: 18px; margin: 28px 0 8px; }
+  a { color: #1b5e9c; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Politica de confidențialitate</h1>
+  <p class="date">Facturi ANAF e-Factura · ultima actualizare: 13 septembrie 2026</p>
+
+  <h2>1. Ce este aplicația</h2>
+  <p>„Facturi ANAF e-Factura" este o aplicație personală, instalată și operată de proprietarul datelor pentru
+  propria firmă. Scopul ei unic este arhivarea facturilor electronice ale firmei, din sistemul național RO e-Factura
+  (Spațiul Privat Virtual al ANAF), în contul Google Drive al firmei.</p>
+
+  <h2>2. Ce date sunt accesate</h2>
+  <ul>
+    <li><strong>ANAF e-Factura:</strong> lista mesajelor din SPV pentru codul fiscal al firmei și conținutul fiecărei
+    facturi (XML și semnătura ANAF). Accesul se face prin autorizare OAuth2 acordată de reprezentantul firmei cu
+    certificatul digital.</li>
+    <li><strong>Google Drive:</strong> aplicația solicită exclusiv permisiunea <code>drive.file</code>, care îi permite
+    să vadă și să modifice doar fișierele și dosarele pe care le-a creat ea însăși. Nu are acces la alte fișiere din
+    Drive și nu poate citi e-mailul, contactele sau alte servicii Google.</li>
+  </ul>
+
+  <h2>3. Cum sunt folosite datele</h2>
+  <p>Facturile sunt descărcate din SPV, convertite în PDF și încărcate în Google Drive-ul firmei, împreună cu XML-ul
+  original și cu un registru al facturilor. Prelucrarea are loc pe echipamentul utilizatorului (calculator sau
+  server propriu). Datele nu sunt folosite în alt scop.</p>
+
+  <h2>4. Unde sunt stocate datele</h2>
+  <p>Exclusiv în conturile utilizatorului: contul Google Drive al firmei și echipamentul pe care rulează aplicația
+  (token-uri de acces și o evidență a fișierelor deja arhivate). Aplicația nu are servere proprii, nu trimite date
+  către dezvoltator sau către terți și nu folosește servicii de analiză, publicitate ori urmărire.</p>
+
+  <h2>5. Partajare cu terți</h2>
+  <p>Nicio dată nu este partajată cu terți. Singurele servicii externe apelate sunt API-ul ANAF e-Factura (sursa
+  facturilor) și API-urile Google Drive și Google Sheets (destinația arhivei), ambele în numele și în contul
+  utilizatorului.</p>
+
+  <h2>6. Păstrare și ștergere</h2>
+  <p>Fișierele rămân în Google Drive atât timp cât utilizatorul dorește și pot fi șterse oricând din Drive. Accesul
+  aplicației poate fi revocat oricând din
+  <a href="https://myaccount.google.com/permissions">setările contului Google</a> (secțiunea „Aplicații terțe cu acces
+  la cont"); după revocare aplicația nu mai poate accesa Drive-ul. Autorizarea ANAF poate fi revocată din portalul
+  ANAF sau prin expirarea token-ului.</p>
+
+  <h2>7. Utilizarea datelor Google</h2>
+  <p>Utilizarea și transferul către orice altă aplicație a informațiilor primite de la API-urile Google respectă
+  <a href="https://developers.google.com/terms/api-services-user-data-policy">Politica privind datele utilizatorilor
+  pentru serviciile API Google</a>, inclusiv cerințele de utilizare limitată.</p>
+
+  <h2>8. Contact</h2>
+  <p>Pentru întrebări legate de această aplicație, folosiți adresa de e-mail de asistență afișată pe ecranul de
+  consimțământ Google al aplicației.</p>
+
+  <p><a href="index.html">← Înapoi</a></p>
+</main>
+</body>
+</html>

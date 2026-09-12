@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facturi ANAF e-Factura</title>
+<meta name="description" content="Aplicație personală care arhivează facturile din ANAF e-Factura (SPV) în propriul Google Drive.">
+<style>
+  :root { color-scheme: light dark; }
+  body { margin: 0; font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1c2430; background: #f6f7f9; }
+  @media (prefers-color-scheme: dark) { body { color: #e8edf2; background: #161a1f; } a { color: #8ec5ff; } .card { background: #1e242b !important; border-color: #2e3742 !important; } }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 24px 64px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .lead { font-size: 18px; opacity: .85; margin: 0 0 32px; }
+  .card { background: #fff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 20px 24px; margin: 16px 0; }
+  h2 { font-size: 18px; margin: 0 0 8px; }
+  ul { padding-left: 20px; }
+  footer { margin-top: 40px; font-size: 14px; opacity: .7; }
+  a { color: #1b5e9c; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Facturi ANAF e-Factura</h1>
+  <p class="lead">O aplicație personală, fără scop comercial, care arhivează facturile electronice ale unei firme
+  din sistemul național <strong>RO e-Factura (SPV)</strong> în propriul cont Google Drive al firmei, înainte ca ANAF
+  să le șteargă după 60 de zile.</p>
+
+  <div class="card">
+    <h2>Ce face</h2>
+    <ul>
+      <li>Descarcă din SPV facturile primite și emise, XML-ul original și semnătura ANAF.</li>
+      <li>Generează un PDF în formatul clasic al facturii fiscale românești.</li>
+      <li>Le așază în Google Drive într-o structură an / lună / primite–emise și ține un registru al facturilor.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Cine o folosește</h2>
+    <p>Aplicația este instalată și rulată de proprietarul datelor pentru propria firmă. Nu este oferită publicului,
+    nu are utilizatori terți și nu colectează informații despre alte persoane.</p>
+  </div>
+
+  <div class="card">
+    <h2>Confidențialitate</h2>
+    <p>Datele rămân în întregime în conturile utilizatorului: contul ANAF/SPV al firmei și contul Google Drive al firmei.
+    Detalii în <a href="confidentialitate.html">Politica de confidențialitate</a>.</p>
+  </div>
+
+  <footer>Cod sursă privat. Contact: adresa de e-mail afișată pe ecranul de consimțământ Google.</footer>
+</main>
+</body>
+</html>
