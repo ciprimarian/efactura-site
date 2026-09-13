@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Autorizare ANAF · Facturi ANAF e-Factura</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { margin: 0; font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1c2430; background: #f6f7f9; }
+  @media (prefers-color-scheme: dark) { body { color: #e8edf2; background: #161a1f; } .card { background: #1e242b !important; border-color: #2e3742 !important; } code { background: #2a313a !important; } }
+  main { max-width: 640px; margin: 0 auto; padding: 48px 24px; }
+  .card { background: #fff; border: 1px solid #e1e5ea; border-radius: 12px; padding: 20px 24px; margin: 16px 0; }
+  code { display: block; background: #eef1f4; padding: 10px; border-radius: 8px; word-break: break-all; font-size: 13px; }
+  .ok { color: #1f7a4d; } .bad { color: #b3261e; }
+  button { font: inherit; padding: 8px 14px; border-radius: 8px; border: 1px solid #c9d0d8; background: transparent; color: inherit; cursor: pointer; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Autorizare ANAF</h1>
+  <div class="card" id="status">Se transmite codul către aplicația de pe calculatorul tău…</div>
+  <div class="card" id="fallback" hidden>
+    <p>Dacă aplicația nu a confirmat, copiază adresa de mai jos și lipește-o în terminalul unde rulează
+    <strong>auth-anaf</strong> (codul expiră în circa un minut):</p>
+    <code id="url"></code>
+    <p><button id="copy">Copiază</button> <span id="copied"></span></p>
+  </div>
+  <p style="opacity:.7;font-size:14px">Această pagină nu stochează nimic. Codul este valabil o singură dată și doar împreună cu
+  secretul aplicației, care nu părăsește niciodată calculatorul tău.</p>
+</main>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var status = document.getElementById('status');
+  var fallback = document.getElementById('fallback');
+  var full = location.href;
+  document.getElementById('url').textContent = full;
+  document.getElementById('copy').onclick = function () {
+    navigator.clipboard.writeText(full).then(function () { document.getElementById('copied').textContent = 'copiat'; });
+  };
+  if (q.get('error')) {
+    status.className = 'card bad';
+    status.textContent = 'ANAF a răspuns cu o eroare: ' + q.get('error') + (q.get('error_description') ? ' · ' + q.get('error_description') : '');
+    return;
+  }
+  if (!q.get('code')) {
+    status.textContent = 'Această pagină primește răspunsul ANAF după autorizare. Nu are nimic de afișat acum.';
+    return;
+  }
+  var port = q.get('port') || sessionStorage.getItem('efactura_port') || '8765';
+  var local = 'http://127.0.0.1:' + port + '/callback?' + q.toString();
+  // Hand the code to the tool running on this machine. Plain HTTP to 127.0.0.1 is allowed from an
+  // HTTPS page for a top-level navigation, so no certificate warning is involved.
+  var img = new Image();
+  var done = false;
+  img.onload = function () { done = true; status.className = 'card ok'; status.textContent = 'Autorizare reușită. Poți închide această fereastră și reveni în terminal.'; };
+  img.onerror = function () { if (!done) { fallback.hidden = false; status.className = 'card bad';
+    status.textContent = 'Aplicația de pe calculatorul tău nu a răspuns pe portul ' + port + '.'; } };
+  img.src = local.replace('/callback?', '/callback.gif?');
+  setTimeout(function () { if (!done) { fallback.hidden = false; } }, 4000);
+})();
+</script>
+</body>
+</html>
