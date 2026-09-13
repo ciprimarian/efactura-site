@@ -48,17 +48,15 @@
     status.textContent = 'Această pagină primește răspunsul ANAF după autorizare. Nu are nimic de afișat acum.';
     return;
   }
-  var port = q.get('port') || sessionStorage.getItem('efactura_port') || '8765';
+  var port = q.get('port') || '8765';
   var local = 'http://127.0.0.1:' + port + '/callback?' + q.toString();
-  // Hand the code to the tool running on this machine. Plain HTTP to 127.0.0.1 is allowed from an
-  // HTTPS page for a top-level navigation, so no certificate warning is involved.
-  var img = new Image();
-  var done = false;
-  img.onload = function () { done = true; status.className = 'card ok'; status.textContent = 'Autorizare reușită. Poți închide această fereastră și reveni în terminal.'; };
-  img.onerror = function () { if (!done) { fallback.hidden = false; status.className = 'card bad';
-    status.textContent = 'Aplicația de pe calculatorul tău nu a răspuns pe portul ' + port + '.'; } };
-  img.src = local.replace('/callback?', '/callback.gif?');
-  setTimeout(function () { if (!done) { fallback.hidden = false; } }, 4000);
+  // A top-level navigation to 127.0.0.1 is allowed from an HTTPS page in every browser (it is not
+  // "mixed content"), so the code reaches the tool without any certificate warning. The fallback
+  // stays visible on this page: if nothing listens locally the browser shows a connection error and
+  // the user can come back here with the Back button and copy the address instead.
+  fallback.hidden = false;
+  status.textContent = 'Se transmite codul către aplicația de pe calculatorul tău (port ' + port + ')…';
+  setTimeout(function () { location.replace(local); }, 600);
 })();
 </script>
 </body>
